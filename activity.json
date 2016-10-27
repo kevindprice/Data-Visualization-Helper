@@ -1,0 +1,71 @@
+{"quizlist":[
+  
+	{
+	"question":"How many variables <i><b>total</b></i> will your graph use?",
+	"option1":"1",
+	"option2":"2 or more",
+	"option3":"none"
+	},
+	{
+	"question":"What is the <i><b>type</b></i> of variable?",
+	"option1":"Categorical",
+	"option2":"Continuous",
+	"option3":"none"
+	},
+	{
+	"question":"How many of your variables are <b><i>dependent</i></b> variables?",
+	"option1":"1",
+	"option2":"2+",
+	"option3":"All/none of my variables are dependent"
+	},
+	{
+	"question":"What is the <b><i>type</i></b> of your variables?",
+	"option1":"All categorical",
+	"option2":"All continuous",
+	"option3":"Mixed categorical and continuous"
+	},
+	{
+	"question":"What is the <b><i>type</i></b> of your <b><i>dependent</i></b> variable?",
+	"option1":"Categorical",
+	"option2":"Continuous",
+	"option3":"none"
+	},
+	{
+	"question":"What is the <b><i>type</i></b> of your <b><i>dependent</i></b> variables?",
+	"option1":"All categorical",
+	"option2":"All continuous",
+	"option3":"Mixed categorical and continuous"
+	},
+	{
+	"question":"How many of your variables are <b><i>independent</i></b> variables?",
+	"option1":"1",
+	"option2":"2",
+	"option3":"3+"
+	},
+	{
+	"question":"What is the <b><i>type</i></b> of your <b><i>independent</i></b> variable?",
+	"option1":"Categorical",
+	"option2":"Continuous",
+	"option3":"none"
+	},
+	{
+	"question":"What is the <b><i>type</i></b> of your <b><i>independent</i></b> variables?",
+	"option1":"All categorical",
+	"option2":"All continuous",
+	"option3":"Mixed categorical and continuous"
+	},
+	{
+	"question":"How many <b><i>levels</i></b> does your <b><i>dependent</i></b> variable have?",
+	"option1":"2",
+	"option2":"3+",
+	"option3":"none"
+	},
+	{
+	"question":"Consider your <b><i>categorical, depdendent</i></b> variable with the highest number of <b><i>levels.</i></b> How many levels does it have?",
+	"option1":"2",
+	"option2":"3+",
+	"option3":"none"
+	}
+
+]
+}
