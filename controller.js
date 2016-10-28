@@ -1,16 +1,14 @@
-$(document).ready(function () {
-	
 var questionNumber=0;
 var questionBank=new Array();
 var stage="#game1";
 var stage2=new Object;
 var questionLock=false;
 var numberOfQuestions;
-var score=0;
+//var score=0;
 var answers = [];
 
 		 
-		 
+
 		 
 
  
@@ -31,6 +29,15 @@ var answers = [];
  
  
 
+function resetQuiz(){
+	answers = [];
+	questionNumber = -1;
+	questionLock=false;
+
+	changeQuestion();
+}
+ 
+ 
 
 
 function displayQuestion(){
@@ -115,6 +122,8 @@ else		//three answer choices
 		
 		//questionNumber starts at 0
 		switch(questionNumber) { 
+		case -1:
+			return 0;  //if the "reset quiz" button is pushed
 		case 0:
 			if(answers[answers.length - 1] == 1)
 			{ return 1; }
@@ -172,7 +181,7 @@ else		//three answer choices
 	
 	function displayFinalSlide(){
 		
-		$(stage).append('<div class="questionText">You have finished the quiz!<br><br>Option Set: '+ (getResult()-20).toString() +'<br>'+'</div>');
+		$(stage).append('<div class="questionText">You have finished the quiz!<br><br>Option Set: ' + getResult() +'<br>'+'</div>');
 		
 	}//display final slide
 	
@@ -187,23 +196,23 @@ function getResult(){
 
 		//1 var, var is categorical
 		if(answers[0]==1 && answers[1]==1)
-		{ return 21; }
+		{ return "1 var, var is categorical"; }
 		
 		//1 var, var is continuous
 		if(answers[0]==1 && answers[1]==2)
-		{ return 22; }
+		{ return "1 var, var is continuous"; }
 		
 		//2+ vars, all/none are dependent,all categorical
 		if(answers[0]==2 && answers[1]==3 && answers[2]==1)
-		{ return 23; }
+		{ return "2+ vars, all/none are dependent,all categorical"; }
 		
 		//2+ vars, all/none are dependent,all continuous
 		if(answers[0]==2 && answers[1]==3 && answers[2]==2)
-		{ return 24; }
+		{ return "2+ vars, all/none are dependent,all continuous"; }
 		
-		//2+ vars, all/none are dependent,all categorical
+		//2+ vars, all/none are dependent,mixed
 		if(answers[0]==2 && answers[1]==3 && answers[2]==3)
-		{ return 25; }
+		{ return "2+ vars, all/none are dependent,mixed"; }
 		
 		
 /////////////////////////////////////////////////
@@ -216,22 +225,22 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cat,dep 2 levels
 			//(1)categorical --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==1 )
-		{ return 26; }
+		{ return "(1)categorical --> (1)categorical, 2 levels"; }
 
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cat,dep 3+ levels
 			//(1)categorical --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==2 )
-		{ return 27; }
+		{ return "(1)categorical --> (1)categorical, 3+ levels"; }
 
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cont,dep 2 levels
 			//(1)continuous --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==1 )
-		{ return 28; }
+		{ return "(1)continuous --> (1)categorical, 2 levels"; }
 	
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cont,dep 3+ levels
 			//(1)continuous --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==2 )
-		{ return 29; }
+		{ return "(1)continuous --> (1)categorical, 3+ levels"; }
 
 
 		//2 independent variables... /////////////////
@@ -240,32 +249,67 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cat,dep 2 levels
 			//(2)categorical --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==1 && answers[5]==1 )
-		{ return 30; }
+		{ return "(2)categorical --> (1)categorical, 2 levels"; }
 
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cat,dep 3+ levels
 			//(2)categorical --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==1 && answers[5]==2 )
-		{ return 31; }
+		{ return "(2)categorical --> (1)categorical, 3+ levels"; }
 
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cont,dep 2 levels
 			//(2)continuous --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==2 && answers[5]==1 )
-		{ return 32; }
+		{ return "(2)continuous --> (1)categorical, 2 levels"; }
 	
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cont,dep 3+ levels
 			//(2)continuous --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==2 && answers[5]==2 )
-		{ return 33; }
+		{ return "(2)continuous --> (1)categorical, 3+ levels"; }
 
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is mixed,dep 2 levels
 			//(2)mixed --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==3 && answers[5]==1 )
-		{ return 34; }
+		{ return "(2)mixed --> (1)categorical, 2 levels"; }
 	
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is mixed,dep 3+ levels
 			//(2)mixed --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==3 && answers[5]==2 )
-		{ return 35; }	
+		{ return "(2)mixed --> (1)categorical, 3+ levels"; }	
+	
+
+		//3+ independent variables... /////////////////
+
+		
+		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cat,dep 2 levels
+			//(3+)categorical --> (1)categorical, 2 levels
+		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==1 && answers[5]==1 )
+		{ return "(3+)categorical --> (1)categorical, 2 levels"; }
+
+		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cat,dep 3+ levels
+			//(3+)categorical --> (1)categorical, 3+ levels
+		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==1 && answers[5]==2 )
+		{ return "(3+)categorical --> (1)categorical, 3+ levels"; }
+
+		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cont,dep 2 levels
+			//(3+)continuous --> (1)categorical, 2 levels
+		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==2 && answers[5]==1 )
+		{ return "(3+)continuous --> (1)categorical, 2 levels"; }
+	
+		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cont,dep 3+ levels
+			//(3+)continuous --> (1)categorical, 3+ levels
+		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==2 && answers[5]==2 )
+		{ return "(3+)continuous --> (1)categorical, 3+ levels"; }
+
+		//2+ vars, 1 dep, dep is cat,3+ ind,ind is mixed,dep 2 levels
+			//(3+)mixed --> (1)categorical, 2 levels
+		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==3 && answers[5]==1 )
+		{ return "(3+)mixed --> (1)categorical, 2 levels"; }
+	
+		//2+ vars, 1 dep, dep is cat,3+ ind,ind is mixed,dep 3+ levels
+			//(3+)mixed --> (1)categorical, 3+ levels
+		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==3 && answers[5]==2 )
+		{ return "(3+)mixed --> (1)categorical, 3+ levels"; }	
+	
 	
 	
 	//dependent variable is continuous...
@@ -274,12 +318,12 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cont,1 ind,ind is cat
 			//(1)categorical --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==1 && answers[4]==1)
-		{ return 36; }
+		{ return "(1)categorical --> (1)continuous"; }
 
 		//2+ vars, 1 dep, dep is cont,1 ind,ind is cont
 			//(1)continuous --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==1 && answers[4]==2)
-		{ return 37; }
+		{ return "(1)continuous --> (1)continuous"; }
 
 
 		//2 independent variables...////////////////
@@ -288,17 +332,38 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cont,2 ind,ind is cat
 			//(2)categorical --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==2 && answers[4]==1)
-		{ return 38; }
+		{ return "(2)categorical --> (1)continuous"; }
 
 		//2+ vars, 1 dep, dep is cont,2 ind,ind is cont
 			//(2)continuous --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==2 && answers[4]==2)
-		{ return 39; }
+		{ return "(2)continuous --> (1)continuous"; }
 	
 		//2+ vars, 1 dep, dep is cont,2 ind,ind is mixed
 			//(2)mixed --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==2 && answers[4]==3)
-		{ return 40; }
+		{ return "(2)mixed --> (1)continuous"; }
+	
+	
+		//3+ independent variables...////////////////
+		
+		
+		//2+ vars, 1 dep, dep is cont,3+ ind,ind is cat
+			//(3+)categorical --> (1)continuous
+		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==3 && answers[4]==1)
+		{ return "(3+)categorical --> (1)continuous"; }
+
+		//2+ vars, 1 dep, dep is cont,3+ ind,ind is cont
+			//(3+)continuous --> (1)continuous
+		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==3 && answers[4]==2)
+		{ return "(3+)continuous --> (1)continuous"; }
+	
+		//2+ vars, 1 dep, dep is cont,3+ ind,ind is mixed
+			//(3+)mixed --> (1)continuous
+		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==3 && answers[4]==3)
+		{ return "(3+)mixed --> (1)continuous"; }
+	
+	
 
 /////////////////////////////////////////////////
 ///////2+ Dependent Variables////////////////////
@@ -310,22 +375,22 @@ function getResult(){
 		//2+ vars, 2 dep, dep is cat,1 ind,ind is cat,dep 2 levels
 			//(1)categorical --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==1 )
-		{ return 41; }
+		{ return "(1)categorical --> (2+)categorical, 2 levels"; }
 
 		//2+ vars, 2 dep, dep is cat,1 ind,ind is cat,dep 3+ levels
 			//(1)categorical --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==2 )
-		{ return 42; }
+		{ return "(1)categorical --> (2+)categorical, 3+ levels"; }
 
 		//2+ vars, 2 dep, dep is cat,1 ind,ind is cont,dep 2 levels
 			//(1)continuous --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==1 )
-		{ return 43; }
+		{ return "(1)continuous --> (2+)categorical, 2 levels"; }
 	
 		//2+ vars, 2 dep, dep is cat,1 ind,ind is cont,dep 3+ levels
 			//(1)continuous --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==2 )
-		{ return 44; }
+		{ return "(1)continuous --> (2+)categorical, 3+ levels"; }
 
 
 		//2 independent variables... /////////////////
@@ -334,32 +399,68 @@ function getResult(){
 		//2+ vars, 2 dep, dep is cat,2 ind,ind is cat,dep 2 levels
 			//(2)categorical --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==2 && answers[4]==1 && answers[5]==1 )
-		{ return 45; }
+		{ return "(2)categorical --> (2+)categorical, 2 levels"; }
 
 		//2+ vars, 2 dep, dep is cat,2 ind,ind is cat,dep 3+ levels
 			//(2)categorical --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==2 && answers[4]==1 && answers[5]==2 )
-		{ return 46; }
+		{ return "(2)categorical --> (2+)categorical, 3+ levels"; }
 
 		//2+ vars, 2 dep, dep is cat,2 ind,ind is cont,dep 2 levels
 			//(2)continuous --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==2 && answers[4]==2 && answers[5]==1 )
-		{ return 47; }
+		{ return "(2)continuous --> (2+)categorical, 2 levels"; }
 	
 		//2+ vars, 2 dep, dep is cat,2 ind,ind is cont,dep 3+ levels
 			//(2)continuous --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==2 && answers[4]==2 && answers[5]==2 )
-		{ return 48; }
+		{ return "(2)continuous --> (2+)categorical, 3+ levels"; }
 
 		//2+ vars, 2 dep, dep is cat,2 ind,ind is mixed,dep 2 levels
 			//(2)mixed --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==2 && answers[4]==3 && answers[5]==1 )
-		{ return 49; }
+		{ return "(2)mixed --> (2+)categorical, 2 levels"; }
 	
 		//2+ vars, 2 dep, dep is cat,2 ind,ind is mixed,dep 3+ levels
 			//(2)mixed --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==2 && answers[4]==3 && answers[5]==2 )
-		{ return 50; }
+		{ return "(2)mixed --> (2+)categorical, 3+ levels"; }
+	
+		
+		//3+ independent variables... /////////////////
+
+		
+		//2+ vars, 2 dep, dep is cat,3+ ind,ind is cat,dep 2 levels
+			//(3+)categorical --> (2+)categorical, 2 levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==3 && answers[4]==1 && answers[5]==1 )
+		{ return "(3+)categorical --> (2+)categorical, 2 levels"; }
+
+		//2+ vars, 2 dep, dep is cat,3+ ind,ind is cat,dep 3+ levels
+			//(3+)categorical --> (2+)categorical, 3+ levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==3 && answers[4]==1 && answers[5]==2 )
+		{ return "(3+)categorical --> (2+)categorical, 3+ levels"; }
+
+		//2+ vars, 2 dep, dep is cat,3+ ind,ind is cont,dep 2 levels
+			//(3+)continuous --> (2+)categorical, 2 levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==3 && answers[4]==2 && answers[5]==1 )
+		{ return "(3+)continuous --> (2+)categorical, 2 levels"; }
+	
+		//2+ vars, 2 dep, dep is cat,3+ ind,ind is cont,dep 3+ levels
+			//(3+)continuous --> (2+)categorical, 3+ levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==3 && answers[4]==2 && answers[5]==2 )
+		{ return "(3+)continuous --> (2+)categorical, 3+ levels"; }
+
+		//2+ vars, 2 dep, dep is cat,3+ ind,ind is mixed,dep 2 levels
+			//(3+)mixed --> (2+)categorical, 2 levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==3 && answers[4]==3 && answers[5]==1 )
+		{ return "(3+)mixed --> (2+)categorical, 2 levels"; }
+	
+		//2+ vars, 2 dep, dep is cat,3+ ind,ind is mixed,dep 3+ levels
+			//(3+)mixed --> (2+)categorical, 3+ levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==3 && answers[4]==3 && answers[5]==2 )
+		{ return "(3+)mixed --> (2+)categorical, 3+ levels"; }
+	
+	
 	
 	
 	//dependent variables are continuous...
@@ -368,12 +469,12 @@ function getResult(){
 		//2+ vars, 2 dep, dep is cont,1 ind,ind is cat
 			//(1)categorical --> (2+)continuous
 		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==1 && answers[4]==1)
-		{ return 51; }
+		{ return "(1)categorical --> (2+)continuous"; }
 
 		//2+ vars, 2 dep, dep is cont,1 ind,ind is cont
 			//(1)continuous --> (2+)continuous
 		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==1 && answers[4]==2)
-		{ return 52; }
+		{ return "(1)continuous --> (2+)continuous"; }
 
 
 		//2 independent variables...////////////////
@@ -382,17 +483,38 @@ function getResult(){
 		//2+ vars, 2 dep, dep is cont,2 ind,ind is cat
 			//(2)categorical --> (2+)continuous
 		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==2 && answers[4]==1)
-		{ return 53; }
+		{ return "(2)categorical --> (2+)continuous"; }
 
 		//2+ vars, 2 dep, dep is cont,2 ind,ind is cont
 			//(2)continuous --> (2+)continuous
 		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==2 && answers[4]==2)
-		{ return 54; }
+		{ return "(2)continuous --> (2+)continuous"; }
 	
 		//2+ vars, 2 dep, dep is cont,2 ind,ind is mixed
 			//(2)mixed --> (2+)continuous
 		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==2 && answers[4]==3)
-		{ return 55; }
+		{ return "(2)mixed --> (2+)continuous"; }
+
+	
+		//3+ independent variables...////////////////
+		
+		
+		//2+ vars, 2 dep, dep is cont,3+ ind,ind is cat
+			//(3+)categorical --> (2+)continuous
+		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==3 && answers[4]==1)
+		{ return "(3+)categorical --> (2+)continuous"; }
+
+		//2+ vars, 2 dep, dep is cont,3+ ind,ind is cont
+			//(3+)continuous --> (2+)continuous
+		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==3 && answers[4]==2)
+		{ return "(3+)continuous --> (2+)continuous"; }
+	
+		//2+ vars, 2 dep, dep is cont,3+ ind,ind is mixed
+			//(3+)mixed --> (2+)continuous
+		if(answers[0]==2 && answers[1]==2 && answers[2]==2 && answers[3]==3 && answers[4]==3)
+		{ return "(3+)mixed --> (2+)continuous"; }
+
+	
 	
 	
 	//dependent variables are mixed...
@@ -403,22 +525,22 @@ function getResult(){
 		//2+ vars, 2 dep, dep is mixed,1 ind,ind is cat,dep 2 levels
 			//(1)categorical --> (2+)mixed, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==1 && answers[4]==1 && answers[5]==1 )
-		{ return 56; }
+		{ return "(1)categorical --> (2+)mixed, 2 levels"; }
 
 		//2+ vars, 2 dep, dep is mixed,1 ind,ind is cat,dep 3+ levels
 			//(1)categorical --> (2+)mixed, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==1 && answers[4]==1 && answers[5]==2 )
-		{ return 57; }
+		{ return "(1)categorical --> (2+)mixed, 3+ levels"; }
 
 		//2+ vars, 2 dep, dep is mixed,1 ind,ind is cont,dep 2 levels
 			//(1)continuous --> (2+)mixed, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==1 && answers[4]==2 && answers[5]==1 )
-		{ return 58; }
+		{ return "(1)continuous --> (2+)mixed, 2 levels"; }
 	
 		//2+ vars, 2 dep, dep is mixed,1 ind,ind is cont,dep 3+ levels
 			//(1)continuous --> (2+)mixed, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==1 && answers[4]==2 && answers[5]==2 )
-		{ return 59; }
+		{ return "(1)continuous --> (2+)mixed, 3+ levels"; }
 
 
 		//2 independent variables... /////////////////
@@ -427,36 +549,70 @@ function getResult(){
 		//2+ vars, 2 dep, dep is mixed,2 ind,ind is cat,dep 2 levels
 			//(2)categorical --> (2+)mixed, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==2 && answers[4]==1 && answers[5]==1 )
-		{ return 60; }
+		{ return "(2)categorical --> (2+)mixed, 2 levels"; }
 
 		//2+ vars, 2 dep, dep is mixed,2 ind,ind is cat,dep 3+ levels
 			//(2)categorical --> (2+)mixed, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==2 && answers[4]==1 && answers[5]==2 )
-		{ return 61; }
+		{ return "(2)categorical --> (2+)mixed, 3+ levels"; }
 
 		//2+ vars, 2 dep, dep is mixed,2 ind,ind is cont,dep 2 levels
 			//(2)continuous --> (2+)mixed, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==2 && answers[4]==2 && answers[5]==1 )
-		{ return 62; }
+		{ return "(2)continuous --> (2+)mixed, 2 levels"; }
 	
 		//2+ vars, 2 dep, dep is mixed,2 ind,ind is cont,dep 3+ levels
 			//(2)continuous --> (2+)mixed, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==2 && answers[4]==2 && answers[5]==2 )
-		{ return 63; }
+		{ return "(2)continuous --> (2+)mixed, 3+ levels"; }
 
 		//2+ vars, 2 dep, dep is mixed,2 ind,ind is mixed,dep 2 levels
 			//(2)mixed --> (2+)mixed, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==2 && answers[4]==3 && answers[5]==1 )
-		{ return 64; }
+		{ return "(2)mixed --> (2+)mixed, 2 levels"; }
 	
 		//2+ vars, 2 dep, dep is mixed,2 ind,ind is mixed,dep 3+ levels
 			//(2)mixed --> (2+)mixed, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==2 && answers[4]==3 && answers[5]==2 )
-		{ return 65; }
+		{ return "(2)mixed --> (2+)mixed, 3+ levels"; }
+		
+		
+		
+		//3+ independent variables... /////////////////
+
+		
+		//2+ vars, 2 dep, dep is mixed,3+ ind,ind is cat,dep 2 levels
+			//(3+)categorical --> (2+)mixed, 2 levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==3 && answers[4]==1 && answers[5]==1 )
+		{ return "(3+)categorical --> (2+)mixed, 2 levels"; }
+
+		//2+ vars, 2 dep, dep is mixed,3+ ind,ind is cat,dep 3+ levels
+			//(3+)categorical --> (2+)mixed, 3+ levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==3 && answers[4]==1 && answers[5]==2 )
+		{ return "(3+)categorical --> (2+)mixed, 3+ levels"; }
+
+		//2+ vars, 2 dep, dep is mixed,3+ ind,ind is cont,dep 2 levels
+			//(3+)continuous --> (2+)mixed, 2 levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==3 && answers[4]==2 && answers[5]==1 )
+		{ return "(3+)continuous --> (2+)mixed, 2 levels"; }
+	
+		//2+ vars, 2 dep, dep is mixed,3+ ind,ind is cont,dep 3+ levels
+			//(3+)continuous --> (2+)mixed, 3+ levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==3 && answers[4]==2 && answers[5]==2 )
+		{ return "(3+)continuous --> (2+)mixed, 3+ levels"; }
+
+		//2+ vars, 2 dep, dep is mixed,3+ ind,ind is mixed,dep 2 levels
+			//(3+)mixed --> (2+)mixed, 2 levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==3 && answers[4]==3 && answers[5]==1 )
+		{ return "(3+)mixed --> (2+)mixed, 2 levels"; }
+	
+		//2+ vars, 2 dep, dep is mixed,3+ ind,ind is mixed,dep 3+ levels
+			//(3+)mixed --> (2+)mixed, 3+ levels
+		if(answers[0]==2 && answers[1]==2 && answers[2]==3 && answers[3]==3 && answers[4]==3 && answers[5]==2 )
+		{ return "(3+)mixed --> (2+)mixed, 3+ levels"; }
+		
+		
 		
 	}
 	
 	
-	
-	
-});//doc ready
