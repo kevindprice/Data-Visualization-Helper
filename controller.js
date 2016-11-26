@@ -181,7 +181,7 @@ else		//three answer choices
 	
 	function displayFinalSlide(){
 		
-		$(stage).append('<div class="questionText">You have finished the quiz!<br><br>Option Set: ' + getResult() +'<br>'+'</div>');
+		$(stage).append('<div class="answerText">For your data:<br>' + getResult() +'<br>'+'</div>');
 		
 	}//display final slide
 	
@@ -194,25 +194,27 @@ function getResult(){
 /////////////////////////////////////////////////
 ///////Etc...////////////////////
 
-		//1 var, var is categorical
+		//*1 var, var is categorical
 		if(answers[0]==1 && answers[1]==1)
-		{ return "1 var, var is categorical"; }
+		{ return "<br>Best graphs: Bar chart, pie chart"; }
 		
 		//1 var, var is continuous
 		if(answers[0]==1 && answers[1]==2)
-		{ return "1 var, var is continuous"; }
+		{ return "<br>Best graphs: Histogram, density plot<br>"
+				+ "Also consider: Box plot, violin plot<br>"
+				+ "Matching statistic: One-sample t-test"; }
 		
 		//2+ vars, all/none are dependent,all categorical
 		if(answers[0]==2 && answers[1]==3 && answers[2]==1)
-		{ return "2+ vars, all/none are dependent,all categorical"; }
+		{ return "<br>Best graphs: Your variables cannot be simultaneously visualized in a single graph. Consider using multiple bar charts or pie charts.<br><br>Also consider: Bar chart, pie chart"; }
 		
 		//2+ vars, all/none are dependent,all continuous
 		if(answers[0]==2 && answers[1]==3 && answers[2]==2)
-		{ return "2+ vars, all/none are dependent,all continuous"; }
+		{ return "<p style='text-indent:-.15in;'>Best graphs:<br>If you want to show correlations between variables: Quilt plot, association network<br>If you want to show distributions of each variable, consider using multiple histograms, density plots, box plots, or violin plots</p><p style='text-indent:-.15in;'>Also consider: Histogram, density plot, box plot, violin plot</p><p style='text-indent:-.15in;'>Matching statistic: Correlation matrix</p>"; }
 		
 		//2+ vars, all/none are dependent,mixed
 		if(answers[0]==2 && answers[1]==3 && answers[2]==3)
-		{ return "2+ vars, all/none are dependent,mixed"; }
+		{ return "<p style='text-indent:-.15in;'>Best graphs: Your variables cannot be simultaneously visualized in a single graph. Consider using a combination of histograms, density plots, box plots, or violin plots (for continuous variables) and bar charts or pie charts (for categorical variables).</p><p style='text-indent:-.15in;'>Also consider: Histogram, density plot, box plot, violin plot, bar chart, pie chart</p>"; }
 		
 		
 /////////////////////////////////////////////////
@@ -225,22 +227,22 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cat,dep 2 levels
 			//(1)categorical --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==1 )
-		{ return "(1)categorical --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: Logistic line plot, mosaic plot<br><br>Matching statistic: Chi square, logistic regression (repeated measures)"; }
 
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cat,dep 3+ levels
 			//(1)categorical --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==2 )
-		{ return "(1)categorical --> (1)categorical, 3+ levels"; }
+		{ return "Best graphs: Mosaic plot<br><br>Matching statistic: Chi square"; }
 
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cont,dep 2 levels
 			//(1)continuous --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==1 )
-		{ return "(1)continuous --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: Logistic scatterplot<br>Also consider: Line plot<br>Matching statistic: Logistic regression (simple)"; }
 	
 		//2+ vars, 1 dep, dep is cat,1 ind,ind is cont,dep 3+ levels
 			//(1)continuous --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==2 )
-		{ return "(1)continuous --> (1)categorical, 3+ levels"; }
+		{ return "Matching statistic: Logistic regression (multinomial)"; }
 
 
 		//2 independent variables... /////////////////
@@ -249,43 +251,43 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cat,dep 2 levels
 			//(2)categorical --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==1 && answers[5]==1 )
-		{ return "(2)categorical --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: Logistic interaction plot<br>Matching statistic: Logistic regression (factorial)"; }
 
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cat,dep 3+ levels
 			//(2)categorical --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==1 && answers[5]==2 )
-		{ return "(2)categorical --> (1)categorical, 3+ levels"; }
+		{ return "Matching statistic: Logistic regression (factorial)"; }
 
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cont,dep 2 levels
 			//(2)continuous --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==2 && answers[5]==1 )
-		{ return "(2)continuous --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: 3D logistic scatterplot<br><br>Also consider: By breaking up one of your continuous variables into a categorical variable, you can use a logistic interaction plot<br><br>Matching statistic: Logistic regression (multiple)"; }
 	
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is cont,dep 3+ levels
 			//(2)continuous --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==2 && answers[5]==2 )
-		{ return "(2)continuous --> (1)categorical, 3+ levels"; }
+		{ return "Impossible to graph"; }
 
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is mixed,dep 2 levels
 			//(2)mixed --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==3 && answers[5]==1 )
-		{ return "(2)mixed --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: Logistic interaction plot<br>Matching statistic: Logistic regression (multiple)"; }
 	
 		//2+ vars, 1 dep, dep is cat,2 ind,ind is mixed,dep 3+ levels
 			//(2)mixed --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==2 && answers[4]==3 && answers[5]==2 )
-		{ return "(2)mixed --> (1)categorical, 3+ levels"; }	
+		{ return "Matching statistic: Logistic regression (multiple)"; }	
 	
 
 		//3+ independent variables... /////////////////
 
 		
-		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cat,dep 2 levels
+		//?????2+ vars, 1 dep, dep is cat,3+ ind,ind is cat,dep 2 levels
 			//(3+)categorical --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==1 && answers[5]==1 )
 		{ return "(3+)categorical --> (1)categorical, 2 levels"; }
 
-		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cat,dep 3+ levels
+		//?????2+ vars, 1 dep, dep is cat,3+ ind,ind is cat,dep 3+ levels
 			//(3+)categorical --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==1 && answers[5]==2 )
 		{ return "(3+)categorical --> (1)categorical, 3+ levels"; }
@@ -293,22 +295,22 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cont,dep 2 levels
 			//(3+)continuous --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==2 && answers[5]==1 )
-		{ return "(3+)continuous --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: “Your variables cannot be simultaneously visualized in a single graph. Consider using a combination of the following:” Logistic scatterplot, logistic interaction plot<br>Also consider: 3D logistic scatterplot, 3D logistic interaction plot<br>Matching statistic: Logistic regression (multiple)"; }
 	
 		//2+ vars, 1 dep, dep is cat,3+ ind,ind is cont,dep 3+ levels
 			//(3+)continuous --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==2 && answers[5]==2 )
-		{ return "(3+)continuous --> (1)categorical, 3+ levels"; }
+		{ return "Matching statistic: Logistic regression (multiple)"; }
 
 		//2+ vars, 1 dep, dep is cat,3+ ind,ind is mixed,dep 2 levels
 			//(3+)mixed --> (1)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==3 && answers[5]==1 )
-		{ return "(3+)mixed --> (1)categorical, 2 levels"; }
+		{ return "Best graphs: If you have two continuous variables and one categorical variable: 3D logistic interaction plot<br><br>Also consider: Otherwise, your variables cannot be simultaneously visualized in a single graph. Consider using a combination of the following: Logistic scatterplot, logistic interaction plot, mosaic plot, 3D logistic scatterplot, 3D logistic interaction plot<br><br>Matching statistic: Logistic regression (multiple)"; }
 	
 		//2+ vars, 1 dep, dep is cat,3+ ind,ind is mixed,dep 3+ levels
 			//(3+)mixed --> (1)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==1 && answers[2]==1 && answers[3]==3 && answers[4]==3 && answers[5]==2 )
-		{ return "(3+)mixed --> (1)categorical, 3+ levels"; }	
+		{ return "Matching statistic: Logistic regression (multiple)"; }	
 	
 	
 	
@@ -318,12 +320,12 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cont,1 ind,ind is cat
 			//(1)categorical --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==1 && answers[4]==1)
-		{ return "(1)categorical --> (1)continuous"; }
+		{ return "Best graphs: Line plot<br>Also consider: Multiple box plot, multiple violin plot<br>Matching statistic: ANOVA (one-way), t-test"; }
 
 		//2+ vars, 1 dep, dep is cont,1 ind,ind is cont
 			//(1)continuous --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==1 && answers[4]==2)
-		{ return "(1)continuous --> (1)continuous"; }
+		{ return "Best graphs: Scatterplot<br>Matching statistic: Linear regression (simple)"; }
 
 
 		//2 independent variables...////////////////
@@ -332,17 +334,17 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cont,2 ind,ind is cat
 			//(2)categorical --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==2 && answers[4]==1)
-		{ return "(2)categorical --> (1)continuous"; }
+		{ return "Best graphs: Interaction plot (1)<br>Also consider: Multiple box plot, multiple violin plot<br>Matching statistic: ANOVA (two-way)"; }
 
 		//2+ vars, 1 dep, dep is cont,2 ind,ind is cont
 			//(2)continuous --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==2 && answers[4]==2)
-		{ return "(2)continuous --> (1)continuous"; }
+		{ return "Best graphs: “By breaking down one of your continuous variables into categories, you can use an interaction plot. This is probably the most common method for plotting your set of variables.” Interaction plot (2) “ To plot your data in a single graph, use:” 3D Scatterplot (1)<br><br>Also consider: Scatterplot<br><br>Matching statistic: Linear regression (multiple)"; }
 	
 		//2+ vars, 1 dep, dep is cont,2 ind,ind is mixed
 			//(2)mixed --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==2 && answers[4]==3)
-		{ return "(2)mixed --> (1)continuous"; }
+		{ return "Best graphs: Interaction plot (2)<br>Matching statistic: ANCOVA, Linear regression (multiple)"; }
 	
 	
 		//3+ independent variables...////////////////
@@ -351,17 +353,17 @@ function getResult(){
 		//2+ vars, 1 dep, dep is cont,3+ ind,ind is cat
 			//(3+)categorical --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==3 && answers[4]==1)
-		{ return "(3+)categorical --> (1)continuous"; }
+		{ return "Best graphs: Interaction plot (3)<br>Also consider: Multiple box plot, multiple violin plot<br>Matching statistic: ANOVA (3-way+)"; }
 
 		//2+ vars, 1 dep, dep is cont,3+ ind,ind is cont
 			//(3+)continuous --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==3 && answers[4]==2)
-		{ return "(3+)continuous --> (1)continuous"; }
+		{ return "Best graphs: Your variables cannot be simultaneously visualized in a single graph. We suggest using multiple graphs to visualize your data: use scatterplots to visualize the relationship between each IV and your DV, and use two-way interaction plots to visualize each two-way interaction. Scatterplot, interaction plot (2)<br><br>Matching statistic: Linear regression (multiple)"; }
 	
 		//2+ vars, 1 dep, dep is cont,3+ ind,ind is mixed
 			//(3+)mixed --> (1)continuous
 		if(answers[0]==2 && answers[1]==1 && answers[2]==2 && answers[3]==3 && answers[4]==3)
-		{ return "(3+)mixed --> (1)continuous"; }
+		{ return "Also consider: If you have 1 continuous and 2-3 categorical independent variables, we suggest Interaction plot (3) If you have 2 continuous and 1 categorical independent variables, we suggest: 3D interaction plot"; }
 	
 	
 
@@ -375,19 +377,19 @@ function getResult(){
 		//2+ vars, 2 dep, dep is cat,1 ind,ind is cat,dep 2 levels
 			//(1)categorical --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==1 )
-		{ return "(1)categorical --> (2+)categorical, 2 levels"; }
+		{ return "Best graphs: “We suggest visualizing your data by splitting your analysis into two graphs (one for each dependent variable). Then use a mosaic plot or a logistic line plot for each one” Mosaic plot, logistic line plot<br><br>Matching statistic: MANOVA (one-way)"; }
 
 		//2+ vars, 2 dep, dep is cat,1 ind,ind is cat,dep 3+ levels
 			//(1)categorical --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==1 && answers[5]==2 )
-		{ return "(1)categorical --> (2+)categorical, 3+ levels"; }
+		{ return "Best graphs: We suggest visualizing your data by splitting your results between two mosaic plots (one for each dependent variable) Mosaic plot<br><br>Matching statistic: MANOVA (one-way)"; }
 
-		//2+ vars, 2 dep, dep is cat,1 ind,ind is cont,dep 2 levels
+		//?????2+ vars, 2 dep, dep is cat,1 ind,ind is cont,dep 2 levels
 			//(1)continuous --> (2+)categorical, 2 levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==1 )
 		{ return "(1)continuous --> (2+)categorical, 2 levels"; }
 	
-		//2+ vars, 2 dep, dep is cat,1 ind,ind is cont,dep 3+ levels
+		//?????2+ vars, 2 dep, dep is cat,1 ind,ind is cont,dep 3+ levels
 			//(1)continuous --> (2+)categorical, 3+ levels
 		if(answers[0]==2 && answers[1]==2 && answers[2]==1 && answers[3]==1 && answers[4]==2 && answers[5]==2 )
 		{ return "(1)continuous --> (2+)categorical, 3+ levels"; }

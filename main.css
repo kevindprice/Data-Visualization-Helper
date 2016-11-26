@@ -54,6 +54,14 @@ font-size:27px;
 color:#FFF;
 }
 
+.answerText{
+margin-left:35px;
+text-indent:-.35in;
+font-size:18px;
+color:#FFF;
+}
+
+
 .option{width:400px;
 height:30px;
 margin:15px;
